@@ -3,12 +3,10 @@
   <div class="home-container" [ngClass]="{'iniciado': username!==''}">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>¡Bienvenido!  @if (username!==''){
-        }</ion-card-title>
+        <ion-card-title>¡Bienvenido!</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p style="color: white;">Usuario: {{username}}
-        </p>
+        <h1>Se mostrara el listado de clases del dia actual</h1>
         <ion-button expand="full" color="primary" [routerLink]="['/listaclasesalu']">
           Ver clases
         </ion-button>
