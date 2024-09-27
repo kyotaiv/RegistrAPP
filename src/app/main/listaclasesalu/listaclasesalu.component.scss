@@ -1,0 +1,35 @@
+/* Estilo general para el contenedor de clases */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para la tarjeta de clases */
+.class-card {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para cada item de clase */
+.class-item {
+  padding: 15px;
+  background-color: #572364;
+  transition: background-color 0.3s;
+  border-radius: 8px; /* Bordes redondeados sin contorno */
+  margin-bottom: 10px;
+}
+
+/* Efecto al pasar el mouse sobre el item de clase */
+.class-item:hover {
+  background-color: #622d6f; /* Un ligero cambio de color */
+}
+
+/* Estilo para el título de clase */
+.class-title {
+  color: #4CAF50;
+  font-size: 1.5em;
+  margin: 0; /* Elimina el margen para mejorar el espaciado */
+}

@@ -1,0 +1,26 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+ion-card-header {
+  background-color: #572364;
+  color: white;
+  border-radius: 15px 15px 0 0;
+}
+
+ion-card-content {
+  p {
+    color: #555;
+    margin: 15px 0;
+  }
+}

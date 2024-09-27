@@ -1,0 +1,17 @@
+<app-header></app-header>
+<ion-content class="ion-padding" fullscreen>
+  <div class="home-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Bienvenido!</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p style="color: white;">Usuario: {{username}}
+          <ion-button color="secondary" [routerLink]="['/listaclases']">
+            Lista de Clases
+          </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<app-footer></app-footer>

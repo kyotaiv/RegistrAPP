@@ -1,0 +1,42 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+ion-card-header {
+  background-color: #572364;
+  color: white;
+  border-radius: 15px 15px 0 0;
+  padding: 20px;
+}
+
+ion-card-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+ion-card-content {
+  p {
+    font-size: 18px;
+    color: #555;
+    margin: 15px 0;
+  }
+
+  ion-button {
+    margin-top: 20px; /* Espaciado superior para el botón */
+    margin-bottom: 20px; /* Espaciado inferior para el botón */
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* Centra el botón horizontalmente */
+  }
+}

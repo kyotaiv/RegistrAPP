@@ -1,0 +1,48 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+ion-card-header {
+  text-align: center;
+}
+
+ion-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+ion-card-subtitle {
+  color: #8e8e93;
+}
+
+ion-button {
+  margin-top: 20px;
+  color: white;
+  --background: #622d6f;
+  --background-activated: #572364;
+  --border-radius: 8px;
+}
+
+.contenido{
+  background-color: #572364;
+}
+
+
+ion-list {
+  background-color: #ffffff; /* O el color que prefieras */
+}
+
+.class-item {
+  background-color: #f9f9f9; /* Color de fondo para cada item */
+}

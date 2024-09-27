@@ -1,0 +1,19 @@
+<app-header></app-header>
+<ion-content class="ion-padding" fullscreen>
+  <div class="home-container" [ngClass]="{'iniciado': username!==''}">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Bienvenido!  @if (username!==''){
+        }</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p style="color: white;">Usuario: {{username}}
+        </p>
+        <ion-button expand="full" color="primary" [routerLink]="['/listaclasesalu']">
+          Ver clases
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<app-footer></app-footer>

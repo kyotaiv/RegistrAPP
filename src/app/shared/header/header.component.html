@@ -1,0 +1,11 @@
+<ion-toolbar style="--background: #572364; padding: 10px;">
+  <ion-title style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+    <h1 style="margin: 0; color: white;">DuocUC</h1>
+    <ng-container *ngIf="!username; else loggedIn"></ng-container>
+    <ng-template #loggedIn>
+      <div>
+        <ion-button (click)="logout()" color="light">Cerrar Sesión</ion-button>
+      </div>
+    </ng-template>
+  </ion-title>
+</ion-toolbar>
