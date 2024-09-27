@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -7,6 +7,7 @@ import { AlumnoComponent } from './alumno/alumno.component';
 import { ProfesorComponent } from './profesor/profesor.component';
 import { ListaclasesComponent } from './listaclases/listaclases.component';
 import { ListaclasesaluComponent } from './listaclasesalu/listaclasesalu.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {path:'home', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:'alumno',component: AlumnoComponent},
   {path:'profesor',component: ProfesorComponent},
   {path:'listaclases',component: ListaclasesComponent},
-  {path:'listaclasesalu', component: ListaclasesaluComponent}
+  {path:'listaclasesalu', component: ListaclasesaluComponent},
+  {path:'notfound',component:NotFoundComponent},
 ];
 
 @NgModule({
