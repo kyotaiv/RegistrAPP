@@ -8,6 +8,7 @@ import { ProfesorComponent } from './profesor/profesor.component';
 import { ListaclasesComponent } from './listaclases/listaclases.component';
 import { ListaclasesaluComponent } from './listaclasesalu/listaclasesalu.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path:'home', component: HomeComponent },
@@ -18,6 +19,8 @@ const routes: Routes = [
   {path:'listaclases',component: ListaclasesComponent},
   {path:'listaclasesalu', component: ListaclasesaluComponent},
   {path:'notfound',component:NotFoundComponent},
+  {path:'registro',component:RegisterComponent},
+
 ];
 
 @NgModule({

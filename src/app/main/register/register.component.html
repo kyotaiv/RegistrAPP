@@ -1,0 +1,62 @@
+<app-header></app-header>  <!-- Cabecera común de la página -->
+<ion-content class="ion-padding" fullscreen>
+  <div class="register-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Registrarse</ion-card-title>  <!-- Título del formulario -->
+        <ion-card-subtitle>Crea una nueva cuenta</ion-card-subtitle>  <!-- Subtítulo -->
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Campo para ingresar el nombre completo -->
+        <ion-item>
+          <ion-label position="floating">Nombre Completo</ion-label>
+          <ion-input [(ngModel)]="fullName"></ion-input>
+        </ion-item>
+
+        <!-- Campo para ingresar el nombre de usuario -->
+        <ion-item>
+          <ion-label position="floating">Nombre de Usuario</ion-label>
+          <ion-input [(ngModel)]="username"></ion-input>
+        </ion-item>
+
+        <!-- Campo para ingresar la contraseña -->
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+
+        <!-- Campo para confirmar la contraseña -->
+        <ion-item>
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input [(ngModel)]="confirmPassword" type="password"></ion-input>
+        </ion-item>
+
+        <!-- Botón para enviar el formulario de registro -->
+        <ion-button (click)="register()">Registrarse</ion-button>
+
+        <!-- Mensajes de error -->
+        <ion-text color="danger" *ngIf="passwordMismatch">
+          Las contraseñas no coinciden.
+        </ion-text>
+
+        <ion-text color="danger" *ngIf="userExists">
+          El nombre de usuario ya está en uso.
+        </ion-text>
+
+        <ion-text color="danger" *ngIf="fullNameExists">
+          El nombre completo ya está registrado.
+        </ion-text>
+
+        <ion-text color="danger" *ngIf="registerFailed">
+          Hubo un error al crear la cuenta.
+        </ion-text>
+
+        <!-- Mensaje de éxito -->
+        <ion-text color="success" *ngIf="registerSuccess">
+          Cuenta creada exitosamente. ¡Ahora puedes iniciar sesión!
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<app-footer></app-footer>  <!-- Pie de página común de la aplicación -->

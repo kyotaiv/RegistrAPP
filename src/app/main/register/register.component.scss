@@ -1,0 +1,22 @@
+.register-container {
+    display: flex;  // Alinear elementos en el eje principal
+    justify-content: center;  // Centrar horizontalmente el contenido
+    align-items: center;  // Centrar verticalmente el contenido
+    height: 100%;  // Altura completa de la pantalla
+  }
+
+  ion-card {
+    width: 100%;  // Anchura completa para dispositivos pequeños
+    max-width: 500px;  // Limitar la anchura máxima a 500px
+  }
+
+  ion-button {
+    width: 100%;  // Botón de registro toma el ancho completo
+    margin-top: 20px;  // Margen superior para separar del formulario
+  }
+
+  ion-text {
+    display: block;  // Mostrar el mensaje como un bloque
+    margin-top: 10px;  // Espacio superior antes de los mensajes
+    text-align: center;  // Centrar el texto de los mensajes
+  }
