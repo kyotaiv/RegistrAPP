@@ -23,6 +23,8 @@
         </div>
         <ion-button (click)="login(username, password)">Iniciar sesión</ion-button>
         <p><a [routerLink]="['/restcont']" style="color: white;">Reestablecer Contraseña</a></p>
+        <p><a [routerLink]="['/registro']" style="color: white;">Registrarse</a></p>
+
         <ion-text color="danger" *ngIf="loginFailed">
           Usuario o clave incorrectos.
         </ion-text>

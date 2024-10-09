@@ -33,6 +33,8 @@
 
         <!-- Botón para enviar el formulario de registro -->
         <ion-button (click)="register()">Registrarse</ion-button>
+        <p><a [routerLink]="['/']" style="color: white;">Volver</a></p>
+
 
         <!-- Mensajes de error -->
         <ion-text color="danger" *ngIf="passwordMismatch">
