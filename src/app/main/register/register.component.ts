@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
+import { AlertController } from '@ionic/angular';  // Importa el servicio AlertController
+
 
 @Component({
   selector: 'app-register',  // Nombre del componente que será usado en el HTML
@@ -18,9 +20,12 @@ export class RegisterComponent implements OnInit {
   userExists: boolean = false;  // Indica si el nombre de usuario ya está registrado
   fullNameExists: boolean = false;  // Indica si el nombre completo ya está registrado
   registerSuccess: boolean = false;  // Indica si el registro fue exitoso
-
+  errorMessage: string = ''; // Para mostrar mensajes de error (si el usuario ya existe)
+  successMessage: string = ''; // Para mostrar mensaje de éxito
   private authService = inject(AuthService);  // Inyección del servicio de autenticación
   private router = inject(Router);  // Inyección del servicio de enrutamiento
+  private alertController = inject(AlertController);  // Inyecta el AlertController
+  registroFallido: boolean = false;
 
   constructor() { }
 
@@ -28,55 +33,93 @@ export class RegisterComponent implements OnInit {
 
   // Función que se ejecuta cuando el usuario intenta registrarse
   async register(): Promise<void> {
-    // Reiniciar los estados de error y éxito
+    // Reiniciar los estados de error
     this.passwordMismatch = false;
     this.registerFailed = false;
     this.userExists = false;
     this.fullNameExists = false;
     this.registerSuccess = false;
 
-    // Verificar si las contraseñas ingresadas coinciden
-    if (this.password !== this.confirmPassword) {
-      this.passwordMismatch = true;  // Mostrar mensaje de error si no coinciden
-      return;  // Detener la función si las contraseñas no coinciden
+    // Validar que todos los campos tengan texto
+    if (!this.username || !this.password || !this.confirmPassword || !this.fullName) {
+      this.errorMessage = 'Todos los campos son obligatorios.';
+      await this.mostrarAlerta('Error', this.errorMessage);
+      return;
     }
 
+    // Verificar si las contraseñas ingresadas coinciden
+    if (this.password !== this.confirmPassword) {
+      this.passwordMismatch = true;
+      this.errorMessage = 'Las contraseñas no coinciden.';
+      await this.mostrarAlerta('Error', this.errorMessage);
+      return;
+    }
+
+    // Validar el formato de la contraseña
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{5,15}$/;
+    if (!passwordRegex.test(this.password)) {
+      this.errorMessage = 'La contraseña debe tener: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial, y debe tener entre 15 y 20 caracteres.';
+      await this.mostrarAlerta('Error', this.errorMessage);
+      return;
+    }
+
+    // Capitalizar la primera letra del nombre y apellido
+    this.fullName = this.capitalizeFullName(this.fullName);
+
     try {
-      // Verificar si el nombre de usuario o el nombre completo ya existen
+      // Verificar si el usuario ya existe
       const userExists = await this.authService.verificarUsuarioExistente(this.username, this.fullName);
       if (userExists.usernameExists) {
-        this.userExists = true;  // Mostrar mensaje de error si el nombre de usuario ya existe
+        this.userExists = true;
+        this.errorMessage = 'Nombre de usuario ya existente.';
+        await this.mostrarAlerta('Error', this.errorMessage);
         return;
       }
 
       if (userExists.fullNameExists) {
-        this.fullNameExists = true;  // Mostrar mensaje de error si el nombre completo ya existe
+        this.fullNameExists = true;
+        this.errorMessage = 'El nombre ya existe.';
+        await this.mostrarAlerta('Error', this.errorMessage);
         return;
       }
 
-      // Crear un objeto de usuario con la información proporcionada
+      // Crear objeto de usuario
       const newUser = {
         username: this.username,
         password: this.password,
-        typeUser: '2',  // Tipo de usuario predeterminado, por ejemplo '2' para alumnos
+        typeUser: '2',
         fullName: this.fullName
       };
 
-      // Intentar registrar al nuevo usuario usando el servicio de autenticación
+      // Registrar usuario
       const result = await this.authService.registrarUsuario(newUser);
       if (result) {
-        this.registerSuccess = true;  // Mostrar mensaje de éxito
-        // Limpiar los campos del formulario
-        this.username = '';
-        this.password = '';
-        this.confirmPassword = '';
-        this.fullName = '';
+        this.registerSuccess = true;
         this.router.navigate(['/']);
       } else {
-        this.registerFailed = true;  // Mostrar mensaje de error si el registro falla
+        this.registerFailed = true;
+        this.errorMessage = 'Hubo un problema con el registro.';
+        await this.mostrarAlerta('Error', this.errorMessage);
       }
     } catch (error) {
-      this.registerFailed = true;  // Manejar errores durante el proceso de registro
+      this.registerFailed = true;
+      this.errorMessage = 'Error al registrar el usuario.';
+      await this.mostrarAlerta('Error', this.errorMessage);
     }
+  }
+  async mostrarAlerta(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();  // Muestra la alerta
+  }
+  // Función para capitalizar la primera letra de cada palabra en el nombre completo
+  capitalizeFullName(fullName: string): string {
+    return fullName.split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
   }
 }
