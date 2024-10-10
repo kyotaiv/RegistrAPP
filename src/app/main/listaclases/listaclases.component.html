@@ -7,7 +7,7 @@
       </ion-card-header>
       <ion-card-content>
         <ion-list>
-          <ion-item lines="none" >
+          <ion-item lines="none">
             <ion-label>
               <h3 style="color: white;">{{asignatura.nombre}}</h3>
               <p >Sala: {{asignatura.sala}}</p>
@@ -24,9 +24,7 @@
                     </ion-buttons>
                   </ion-toolbar>
                 </ion-header>
-                <ion-content class="ion-padding">
-                  {{qrData}}
-                  <canvas #qrCanvas></canvas>
+                <ion-content class="ion-padding">{{qrData}}<canvas #qrCanvas></canvas>
                 </ion-content>
               </ng-template>
             </ion-modal>

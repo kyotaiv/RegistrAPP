@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router'; // Importamos Router para la navegación
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listaclasesalu',
@@ -12,7 +12,7 @@ export class ListaclasesaluComponent implements OnInit, OnDestroy {
 
   username: string;
   private authService = inject(AuthService);
-  private router = inject(Router); // Inyectamos el Router
+  private router = inject(Router);
 
   subscriptionAuthService: Subscription;
 
@@ -31,5 +31,4 @@ export class ListaclasesaluComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptionAuthService?.unsubscribe();
   }
-
 }

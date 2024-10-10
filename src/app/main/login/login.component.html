@@ -16,15 +16,10 @@
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input [(ngModel)]="password" type="password"></ion-input>
         </ion-item>
-        <div class="spinner">
-          @if (isLoading) {
-            <ion-spinner name="bubbles"></ion-spinner>
-          }
-        </div>
-        <ion-button (click)="login(username, password)">Iniciar sesión</ion-button>
-        <p><a [routerLink]="['/restcont']" style="color: white;">Reestablecer Contraseña</a></p>
-        <p><a [routerLink]="['/registro']" style="color: white;">Registrarse</a></p>
 
+        <ion-button (click)="login(username, password)">Iniciar sesión</ion-button>
+        <p><a [routerLink]="['/registro']" style="color: white;">Registrarse</a></p>
+        <p><a [routerLink]="['/restcont']" style="color: white;">Reestablecer Contraseña</a></p>
         <ion-text color="danger" *ngIf="loginFailed">
           Usuario o clave incorrectos.
         </ion-text>
