@@ -1,18 +1,12 @@
 <ion-toolbar>
   <ion-title>
-
-
-    <!-- Condición: Mostrar el botón y el mensaje de bienvenida si el usuario está logueado -->
     <ng-container *ngIf="username; else notLoggedIn">
       <div class="user-info">
         <p>Bienvenido, <br>{{ username }}</p><br>
         <ion-button (click)="logout()" color="light">Cerrar Sesión</ion-button>
       </div>
     </ng-container>
-
-    <!-- Esto solo se mostrará si no hay un username (no logueado) -->
     <ng-template #notLoggedIn>
-      <!-- Aquí puedes agregar contenido para cuando el usuario no esté logueado -->
     </ng-template>
   </ion-title>
 </ion-toolbar>

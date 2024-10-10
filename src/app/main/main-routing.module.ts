@@ -1,6 +1,5 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RestContComponent } from './rest-cont/rest-cont.component';
 import { AlumnoComponent } from './alumno/alumno.component';
@@ -12,7 +11,6 @@ import { RegisterComponent } from './register/register.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
 
 const routes: Routes = [
-  {path:'home', component: HomeComponent },
   {path:'', component: LoginComponent },
   {path:'restcont', component: RestContComponent },
   {path:'alumno',component: AlumnoComponent},
@@ -30,4 +28,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class MainRoutingModule { }
