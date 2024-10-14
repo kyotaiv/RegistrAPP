@@ -10,6 +10,9 @@ ion-card {
   max-width: 400px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 1.9rem 1.2rem;
+  background: #2a2b38;
+  text-align: center;
 }
 
 ion-card-header {
@@ -17,9 +20,9 @@ ion-card-header {
 }
 
 ion-card-title {
-  font-size: 22px;
-  font-weight: bold;
-  color: white;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #f5f5f5;
 }
 
 ion-card-subtitle {
@@ -27,9 +30,117 @@ ion-card-subtitle {
   margin-top: 5px;
 }
 
+.field {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  background-color: #1f2029;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+}
+
+.input-icon {
+  height: 1em;
+  width: 1em;
+  fill: #572364;
+}
+
+.input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #d3d3d3;
+}
+
+.field input:focus::placeholder {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
 ion-button {
   margin-top: 20px;
+  color: white;
   --background: #622d6f;
   --background-activated: #572364;
   --border-radius: 8px;
+}
+
+.btn {
+  margin: 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  padding: 0.6em 1.2em;
+  background-color: #ffeba7;
+  color: #5e6681;
+  box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #5e6681;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}
+
+.btn-link {
+  color: white;
+  display: block;
+  font-size: 0.75em;
+  transition: color 0.3s ease-out;
+}
+
+.btn-link:hover {
+  color: #ffeba7;
+}
+
+.contenido {
+  background-color: #572364;
+}
+
+ion-list {
+  background-color: #ffffff;
+}
+
+.class-item {
+  background-color: #f9f9f9;
+}
+
+ion-text {
+  color: #ffffff;
+}
+
+ion-input {
+  margin-top: 10px;
+}
+
+ion-item {
+  margin-top: 1rem;
+  background: #1f2029;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+ion-text {
+  color: white;
+  margin-top: 1rem;
+}
+
+ion-text p {
+  text-align: center;
+  margin: 0;
+}
+
+ion-text a {
+  color: white;
+  text-decoration: none;
+}
+
+ion-text a:hover {
+  color: #ffeba7;
 }

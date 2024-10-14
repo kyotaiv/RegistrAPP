@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { AlertController } from '@ionic/angular';  // Importa el servicio AlertController
 
-
 @Component({
   selector: 'app-register',  // Nombre del componente que será usado en el HTML
   templateUrl: './register.component.html',  // Archivo HTML asociado
@@ -15,6 +14,7 @@ export class RegisterComponent implements OnInit {
   password: string = '';  // Almacena la contraseña
   confirmPassword: string = '';  // Almacena la confirmación de contraseña
   fullName: string = '';  // Almacena el nombre completo del usuario
+  typeUser: string = '';
   passwordMismatch: boolean = false;  // Verifica si las contraseñas coinciden
   registerFailed: boolean = false;  // Indica si el registro falló
   userExists: boolean = false;  // Indica si el nombre de usuario ya está registrado
@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
   private authService = inject(AuthService);  // Inyección del servicio de autenticación
   private router = inject(Router);  // Inyección del servicio de enrutamiento
   private alertController = inject(AlertController);  // Inyecta el AlertController
-  registroFallido: boolean = false;
 
   constructor() { }
 
@@ -33,7 +32,6 @@ export class RegisterComponent implements OnInit {
 
   // Función que se ejecuta cuando el usuario intenta registrarse
   async register(): Promise<void> {
-    // Reiniciar los estados de error
     this.passwordMismatch = false;
     this.registerFailed = false;
     this.userExists = false;
@@ -58,7 +56,7 @@ export class RegisterComponent implements OnInit {
     // Validar el formato de la contraseña
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{5,15}$/;
     if (!passwordRegex.test(this.password)) {
-      this.errorMessage = 'La contraseña debe tener: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial, y debe tener entre 15 y 20 caracteres.';
+      this.errorMessage = 'La contraseña debe tener: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial, y debe tener entre 5 y 15 caracteres.';
       await this.mostrarAlerta('Error', this.errorMessage);
       return;
     }
@@ -66,47 +64,45 @@ export class RegisterComponent implements OnInit {
     // Capitalizar la primera letra del nombre y apellido
     this.fullName = this.capitalizeFullName(this.fullName);
 
-    try {
-      // Verificar si el usuario ya existe
-      const userExists = await this.authService.verificarUsuarioExistente(this.username, this.fullName);
-      if (userExists.usernameExists) {
-        this.userExists = true;
-        this.errorMessage = 'Nombre de usuario ya existente.';
-        await this.mostrarAlerta('Error', this.errorMessage);
-        return;
-      }
+    // Verificar si el usuario ya existe
+    const userExists = await this.authService.verificarUsuarioExistente(this.username, this.fullName);
+    if (userExists.usernameExists) {
+      this.userExists = true;
+      this.errorMessage = 'Nombre de usuario ya existente.';
+      await this.mostrarAlerta('Error', this.errorMessage);
+      return;
+    }
 
-      if (userExists.fullNameExists) {
-        this.fullNameExists = true;
-        this.errorMessage = 'El nombre ya existe.';
-        await this.mostrarAlerta('Error', this.errorMessage);
-        return;
-      }
+    if (userExists.fullNameExists) {
+      this.fullNameExists = true;
+      this.errorMessage = 'El nombre ya existe.';
+      await this.mostrarAlerta('Error', this.errorMessage);
+      return;
+    }
 
-      // Crear objeto de usuario
-      const newUser = {
-        username: this.username,
-        password: this.password,
-        typeUser: '2',
-        fullName: this.fullName
-      };
+    // Crear objeto de usuario
+    const newUser = {
+      username: this.username,
+      password: this.password,
+      typeUser: this.typeUser,  // Aquí puedes cambiar a '3' según el tipo de usuario que necesites
+      fullName: this.fullName
+    };
 
-      // Registrar usuario
-      const result = await this.authService.registrarUsuario(newUser);
-      if (result) {
-        this.registerSuccess = true;
-        this.router.navigate(['/']);
-      } else {
-        this.registerFailed = true;
-        this.errorMessage = 'Hubo un problema con el registro.';
-        await this.mostrarAlerta('Error', this.errorMessage);
-      }
-    } catch (error) {
+    // Registrar usuario
+    const result = await this.authService.registrarUsuario(newUser);
+    if (result) {
+      this.router.navigate(['/']);
+      this.username = '';
+      this.password ='';
+      this.fullName='';
+    } else {
       this.registerFailed = true;
-      this.errorMessage = 'Error al registrar el usuario.';
+      this.errorMessage = 'Hubo un problema con el registro.';
       await this.mostrarAlerta('Error', this.errorMessage);
     }
   }
+
+  // Función para mostrar alertas
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
@@ -116,6 +112,7 @@ export class RegisterComponent implements OnInit {
 
     await alert.present();  // Muestra la alerta
   }
+
   // Función para capitalizar la primera letra de cada palabra en el nombre completo
   capitalizeFullName(fullName: string): string {
     return fullName.split(' ')

@@ -1,22 +1,87 @@
 .register-container {
-    display: flex;  // Alinear elementos en el eje principal
-    justify-content: center;  // Centrar horizontalmente el contenido
-    align-items: center;  // Centrar verticalmente el contenido
-    height: 100%;  // Altura completa de la pantalla
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 
-  ion-card {
-    width: 100%;  // Anchura completa para dispositivos pequeños
-    max-width: 500px;  // Limitar la anchura máxima a 500px
-  }
+ion-card {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #1f2029;
+}
 
-  ion-button {
-    width: 100%;  // Botón de registro toma el ancho completo
-    margin-top: 20px;  // Margen superior para separar del formulario
-  }
+ion-card-header {
+  text-align: center;
+}
 
-  ion-text {
-    display: block;  // Mostrar el mensaje como un bloque
-    margin-top: 10px;  // Espacio superior antes de los mensajes
-    text-align: center;  // Centrar el texto de los mensajes
-  }
+ion-card-title {
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #f5f5f5;
+}
+
+ion-card-subtitle {
+  color: #8e8e93;
+}
+
+ion-item {
+  background-color: #1f2029;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  margin-top: 0.5rem;
+}
+
+ion-button {
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+  --background: #572364;
+  --background-activated: #5e6681;
+  --border-radius: 8px;
+}
+
+ion-text {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  color: #f5f5f5;
+}
+
+.input-icon {
+  height: 1em;
+  width: 1em;
+  fill: #572364;
+}
+
+.input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #d3d3d3;
+}
+
+.btn-link {
+  color: #f5f5f5;
+  display: block;
+  font-size: .75em;
+  transition: color .3s ease-out;
+}
+
+.btn-link:hover {
+  color: #ffeba7;
+}
+
+.btn:hover {
+  background-color: #5e6681;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}
+
+.field input:focus::placeholder {
+  opacity: 0;
+  transition: opacity .3s;
+}
