@@ -84,21 +84,27 @@ export class RegisterComponent implements OnInit {
     const newUser = {
       username: this.username,
       password: this.password,
-      typeUser: this.typeUser,  // Aquí puedes cambiar a '3' según el tipo de usuario que necesites
+      typeUser: this.typeUser,
       fullName: this.fullName
     };
 
     // Registrar usuario
     const result = await this.authService.registrarUsuario(newUser);
     if (result) {
-      this.router.navigate(['/']);
-      this.username = '';
-      this.password ='';
-      this.fullName='';
+      this.errorMessage = 'Usuario creado!';
+      const alert = await this.mostrarAlerta('', this.errorMessage);
+
+      await this.delay(3000);  // Espera 3 segundos
+      await alert.dismiss();  // Dismiss de la alerta
+
+      this.router.navigate(['/']);  // Redirige a la página de inicio
+      this.username = '';  // Limpia los campos del formulario
+      this.password = '';
+      this.fullName = '';
     } else {
       this.registerFailed = true;
       this.errorMessage = 'Hubo un problema con el registro.';
-      await this.mostrarAlerta('Error', this.errorMessage);
+      await this.mostrarAlerta('Error', this.errorMessage);  // Muestra la alerta de error
     }
   }
 
@@ -111,6 +117,7 @@ export class RegisterComponent implements OnInit {
     });
 
     await alert.present();  // Muestra la alerta
+    return alert;  // Devuelve la instancia de la alerta
   }
 
   // Función para capitalizar la primera letra de cada palabra en el nombre completo
@@ -118,5 +125,10 @@ export class RegisterComponent implements OnInit {
     return fullName.split(' ')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ');
+  }
+
+  // Función de retraso
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
